@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Code9.FoodOrders.Web.Models.OrderViewModel>
+
+@{
+	ViewBag.Title = "OrdersList";
+}
+
+<h2>OrdersList</h2>
+
+@*<p>
+	@Html.ActionLink("Create New", "Create")
+</p>*@
+<table>
+	<tr>
+		<th>OrderDate</th>
+		<th>Food list</th>
+	</tr>
+
+@foreach (var item in Model) {
+	<tr>
+		<td>
+			@Html.DisplayFor(modelItem => item.OrderDate)
+		</td>
+		<td>
+			@foreach (var food in item.FoodNames){
+					@(food + " | ")            
+			}          
+		</td>
+		@*<td>
+			@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+			@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+			@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+		</td>*@
+	</tr>
+}
+
+</table>
