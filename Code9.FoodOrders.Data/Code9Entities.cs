@@ -3,7 +3,7 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace Code9.FoodOrders.Data
 {
-	internal class Code9Entities : DbContext
+	public class Code9Entities : DbContext
 	{
 		public DbSet<User> Users { get; set; }
 		public DbSet<Food> Foods { get; set; }

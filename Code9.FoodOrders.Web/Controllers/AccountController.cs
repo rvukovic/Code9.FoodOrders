@@ -10,7 +10,11 @@ namespace Code9.FoodOrders.Web.Controllers
 {
 	public class AccountController : Controller
 	{
-		Code9Service _service = new Code9Service();
+		private ICode9Service _service;
+		public AccountController(ICode9Service service)
+		{
+			_service = service;
+		}
 
 		public ActionResult LogOn()
 		{

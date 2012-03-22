@@ -1,6 +1,9 @@
-﻿  <div>
-    @Html.ActionLink("See all of your orders", "Index", "Order")
-  </div>
-  <div>
-     @Html.ActionLink("Go to food list", "Index", "Food")
-  </div>
+﻿@if ( Request.IsAuthenticated )
+{
+	<div>
+		@Html.ActionLink("See all of your orders", "Index", "Order")
+	</div>
+	<div>
+		@Html.ActionLink("Go to food list", "Index", "Food")
+	</div>
+}

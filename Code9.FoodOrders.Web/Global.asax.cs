@@ -31,6 +31,7 @@ namespace Code9.FoodOrders.Web
 
 		protected void Application_Start()
 		{
+			Bootstrapper.Initialise();
 			AreaRegistration.RegisterAllAreas();
 
 			RegisterGlobalFilters(GlobalFilters.Filters);

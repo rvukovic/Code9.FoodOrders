@@ -49,6 +49,7 @@
     <Compile Include="Code9Entities.cs" />
     <Compile Include="Code9Service.cs" />
     <Compile Include="Food.cs" />
+    <Compile Include="ICode9Service.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User.cs" />

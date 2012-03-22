@@ -5,88 +5,70 @@ using System.Linq;
 
 namespace Code9.FoodOrders.Data
 {
-	public class Code9Service
+	public class Code9Service : ICode9Service
 	{
+		public Code9Entities _db;
+		public Code9Service(Code9Entities dbContext)
+		{
+			_db = dbContext;
+		}
+
 		public void AddUser(string username, string password)
 		{
-			using (var db = new Code9Entities())
-			{
-				db.Users.Add(new User
-				             	{
-				             		Username = username,
-				             		Password = password
-				             	});
+			_db.Users.Add(new User
+							{
+								Username = username,
+								Password = password
+							});
 
-				db.SaveChanges();
-			}
+			_db.SaveChanges();
 		}
 
 		public bool UsernameExists(string username)
 		{
-			using (var db = new Code9Entities())
-			{
-				return db.Users.Any(u => u.Username == username);
-			}
+			return _db.Users.Any(u => u.Username == username);
 		}
 
 		public bool UserFound(string username, string password)
 		{
-			using (var db = new Code9Entities())
-			{
+			return _db.Users.Any(u => u.Username == username &&
+									 u.Password == password);
 
-				return db.Users.Any(u => u.Username == username &&
-				                         u.Password == password);
-			}
 		}
 
 		public ICollection<Food> GetAllFoods()
 		{
-			using (var db = new Code9Entities())
-			{
-				return db.Foods.ToList();
-			}
+			return _db.Foods.ToList();
 		}
 
 		public Food GetFood(int id)
 		{
-			using (var db = new Code9Entities())
-			{
-				return db.Foods.Find(id);
-			}
+			return _db.Foods.Find(id);
 		}
 
 		public void RemoveFood(int id)
 		{
-			using (var db = new Code9Entities())
+			var food = _db.Foods.Find(id);
+			if ( food != null )
 			{
-				var food = db.Foods.Find(id);
-				if (food != null)
-				{
-					db.Foods.Remove(food);
-					db.SaveChanges();
-				}
+				_db.Foods.Remove(food);
+				_db.SaveChanges();
 			}
 		}
 
 		public void AddFood(Food food)
 		{
-			using (var db = new Code9Entities())
-			{
-				db.Foods.Add(food);
-				db.SaveChanges();
-			}
+			_db.Foods.Add(food);
+			_db.SaveChanges();
 		}
 
 		public void EditFood(Food food)
 		{
-			using (var db = new Code9Entities())
+			var dbFood = _db.Foods.Find(food.Id);
+			if ( dbFood != null )
 			{
-				var dbFood = db.Foods.Find(food.Id);
-				if (dbFood != null)
-				{
-					db.Entry(dbFood).CurrentValues.SetValues(food);
-					db.SaveChanges();
-				}
+				_db.Entry(dbFood).CurrentValues.SetValues(food);
+				_db.SaveChanges();
 			}
 		}
 
@@ -94,38 +76,33 @@ namespace Code9.FoodOrders.Data
 		{
 			Order newOrder = new Order();
 			newOrder.OrderDate = orderDate;
-			using (var db = new Code9Entities())
-			{
-				User user = db.Users.First(u => u.Username == userName);
-				newOrder.User = user;
-				db.Entry(user).State = EntityState.Unchanged;
-				List<Food> foodsToAttach = new List<Food>();
-				foreach (var foodId in foodIds)
-				{
-					var f = db.Foods.Find(foodId);
-					db.Entry(f).State = EntityState.Unchanged;
-					foodsToAttach.Add(f);
-				}
 
-				newOrder.Foods = foodsToAttach;
-				db.Orders.Add(newOrder);
-				db.SaveChanges();
+			User user = _db.Users.First(u => u.Username == userName);
+			newOrder.User = user;
+			_db.Entry(user).State = EntityState.Unchanged;
+			List<Food> foodsToAttach = new List<Food>();
+			foreach ( var foodId in foodIds )
+			{
+				var f = _db.Foods.Find(foodId);
+				_db.Entry(f).State = EntityState.Unchanged;
+				foodsToAttach.Add(f);
 			}
+
+			newOrder.Foods = foodsToAttach;
+			_db.Orders.Add(newOrder);
+			_db.SaveChanges();
 		}
 
 		public IEnumerable<Order> GetUserOrders(string userName)
 		{
-			using (var db = new Code9Entities())
+			User user = _db.Users.First(u => u.Username == userName);
+			var retVal = _db.Orders.Where(o => o.User.Username == userName).ToList();
+			foreach ( var r in retVal )
 			{
-				User user = db.Users.First(u => u.Username == userName);
-				var retVal = db.Orders.Where(o => o.User.Username == userName).ToList();
-				foreach (var r in retVal)
-				{
-					db.Entry(r).Collection(a => a.Foods).Load();
-				}
-
-				return retVal;
+				_db.Entry(r).Collection(a => a.Foods).Load();
 			}
+
+			return retVal;
 		}
 	}
 }

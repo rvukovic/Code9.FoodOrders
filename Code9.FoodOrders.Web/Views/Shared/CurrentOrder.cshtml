@@ -1,30 +1,32 @@
 ﻿@model Code9.FoodOrders.Web.Models.OrderViewModel
-
-<div id="CurrentOrderDiv">
-	@using (Html.BeginForm("CompleteOrder", "Order", FormMethod.Post))
-	{
-		@Html.ValidationSummary(true)
-		<fieldset>
-			<legend>Your current order:</legend>           
-			@if (Model.FoodNames.Any())
-			{
-				<ul>
+@if ( Request.IsAuthenticated )
+{
+	<div id="CurrentOrderDiv">
+		@using (Html.BeginForm("CompleteOrder", "Order", FormMethod.Post))
+		{
+			@Html.ValidationSummary(true)
+			<fieldset>
+				<legend>Your current order:</legend>           
+				@if (Model.FoodNames.Any())
+				{
+					<ul>
 			
-					@for ( int i = 0; i < Model.FoodNames.Count; i++ )
-					{
-						<li>@Model.FoodNames[i] | [@Html.ActionLink("Remove", "RemoveOrderFood", "Order", new { foodId = Model.FoodIds[i] }, null)]</li>
-					}
-				</ul>
-				<p>
-					<input type="submit" value="Complete this order" />        
-				</p>
-			}
-			else
-			{
-				<br/>
-				<div>No meals selected yet.</div>
-			}
+						@for (int i = 0; i < Model.FoodNames.Count; i++)
+						{
+							<li>@Model.FoodNames[i] | [@Html.ActionLink("Remove", "RemoveOrderFood", "Order", new {foodId = Model.FoodIds[i]}, null)]</li>
+						}
+					</ul>
+					<p>
+						<input type="submit" value="Complete this order" />        
+					</p>
+				}
+				else
+				{
+					<br/>
+					<div>No meals selected yet.</div>
+				}
 
-		</fieldset>
-	}
-</div>
+			</fieldset>
+		}
+	</div>
+}

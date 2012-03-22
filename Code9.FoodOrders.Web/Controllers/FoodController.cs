@@ -6,10 +6,15 @@ using Code9.FoodOrders.Web.Models;
 
 namespace Code9.FoodOrders.Web.Controllers
 {
+	[Authorize]
 	public class FoodController : Controller
 	{
-		private Code9Service _service = new Code9Service();
-
+		private ICode9Service _service;
+		public FoodController(ICode9Service service)
+		{
+			_service = service;
+		}
+		
 		public ActionResult Index()
 		{
 			return View(_service.GetAllFoods());
