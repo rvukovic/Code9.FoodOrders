@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Code9.FoodOrders.Web.Models.OrderViewModel>
+
+@{
+	ViewBag.Title = "OrdersList";
+	Layout = "~/Views/Shared/_Layout.Mobile.cshtml";
+}
+<section id="login-page" data-role="page" >
+	<header data-role="header"><h1>OrdersList</h1></header>
+	<div data-role="content">
+		<ul data-role="listview" >
+			@foreach ( var item in Model )
+			{
+				<li>
+					<a href="#">@item.OrderDate.ToLongDateString()</a>
+					<ul data-role="listview" data-backbtn="true">
+						@Html.DisplayFor(modelItem => item.OrderDate)
+						@foreach (var food in item.FoodNames)
+						{
+							<li>@food</li>
+						}          
+					</ul>
+				</li>
+			}
+		</ul>
+	</div>
+</section>

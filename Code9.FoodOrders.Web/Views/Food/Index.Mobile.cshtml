@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Code9.FoodOrders.Data.Food>
+
+
+@{
+	ViewBag.Title = "FoodList";
+	Layout = "~/Views/Shared/_Layout.Mobile.cshtml";
+}
+<section id="login-page" data-role="page" >
+	<header data-role="header"><h1>FoodList</h1></header>
+	<div data-role="content">
+
+		<p>
+			@Html.ActionLink("Create New", "Create")
+		</p>
+
+		<ul data-role="listview" >
+
+			@foreach (var item in Model) {
+				<li>
+					<a href="@Url.Action("AddFoodToOrder", new { foodId = item.Id })" data-transition="none">
+						<h1>@item.Name</h1>
+						<p>@item.Description</p>
+					</a>
+				</li>
+			}
+		</ul>
+	</div>
+	<footer data-role="footer">
+			<nav data-role="navbar">
+				<ul>
+					@Html.ActionLink("Foods", "Index", "Food")
+					@Html.ActionLink("History", "Index", "Order")
+					<a href="@Url.Action("CurrentOrder", "Order")">Orders</a>
+				</ul>
+			</nav>
+		</footer>
+</section>

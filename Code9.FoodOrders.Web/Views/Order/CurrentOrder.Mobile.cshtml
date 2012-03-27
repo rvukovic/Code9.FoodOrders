@@ -1,0 +1,50 @@
+﻿@model Code9.FoodOrders.Web.Models.OrderViewModel
+@{
+	ViewBag.Title = "FoodList";
+	Layout = "~/Views/Shared/_Layout.Mobile.cshtml";
+}
+
+<section id="login-page" data-role="page" >
+	<header data-role="header"><h1>FoodList</h1></header>
+	<div data-role="content">
+
+		<div id="CurrentOrderDiv">
+			@using ( Html.BeginForm("CompleteOrder", "Order", FormMethod.Post) )
+			{
+				@Html.ValidationSummary(true)
+				<fieldset>
+					<legend>Your current order:</legend>           
+					@if ( Model.FoodNames.Any() )
+					{
+						<ul>
+			
+							@for ( int i = 0; i < Model.FoodNames.Count; i++ )
+							{
+								<li>@Model.FoodNames[i] | [@Html.ActionLink("Remove", "RemoveOrderFood", "Order", new { foodId = Model.FoodIds[i] }, null)]</li>
+							}
+						</ul>
+						<p>
+							<input type="submit" value="Complete this order" />        
+						</p>
+					}
+					else
+					{
+						<br/>
+						<div>No meals selected yet.</div>
+					}
+
+				</fieldset>
+			}
+		</div>
+	</div>
+	<footer data-role="footer">
+		<nav data-role="navbar">
+			<ul>
+				@Html.ActionLink("Foods", "Index", "Food")
+				@Html.ActionLink("History", "Index", "Order")
+				<a href="@Url.Action("CurrentOrder", "Order")">Orders</a>
+			</ul>
+		</nav>
+	</footer>
+</section>
+

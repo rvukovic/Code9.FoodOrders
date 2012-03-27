@@ -59,5 +59,10 @@ namespace Code9.FoodOrders.Web.Controllers
 
 			return View(viewModels);
 		}
+
+		public ActionResult CurrentOrder()
+		{
+			return View(CurrentSession.CurrentOrder);
+		}
 	}
 }
