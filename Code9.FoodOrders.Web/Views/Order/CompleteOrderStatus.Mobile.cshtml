@@ -1,0 +1,28 @@
+﻿@model Code9.FoodOrders.Web.Models.OrderViewModel
+
+@{
+	ViewBag.Title = "OrdersList";
+	Layout = "~/Views/Shared/_Layout.Mobile.cshtml";
+}
+<section id="login-page" data-role="page" >
+	<header data-role="header"  data-position="fixed" >
+		<h1>Order complete</h1>
+		@Html.ActionLink("Log Off", "LogOff", "Account",null, new{@class="ui-btn-right"})
+	</header>
+	
+	<div id="CurrentOrderDiv" data-role="content">
+			<fieldset data-role="fieldcontain">
+				<div>
+					<h1>OrderDate</h1>
+					<p>@Model.OrderDate.ToShortDateString()</p>
+				</div>
+				<ul data-role="listview">
+					@foreach (var food in Model.FoodNames)
+					{
+						<li>@food</li>
+					}
+				</ul>
+			</fieldset>
+	</div>
+	@Html.Partial("Footer.Mobile")
+</section>

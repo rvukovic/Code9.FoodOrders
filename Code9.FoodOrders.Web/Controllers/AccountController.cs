@@ -18,6 +18,10 @@ namespace Code9.FoodOrders.Web.Controllers
 
 		public ActionResult LogOn()
 		{
+			if ( Request.IsAuthenticated )
+			{
+				return RedirectToAction("Index", "Food");
+			}
 			return View(new LoginViewModel());
 		}
 

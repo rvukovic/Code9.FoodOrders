@@ -207,7 +207,7 @@
     <Content Include="Views\Order\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Order\CompleteOrderStatus.cshtml" />
+    <Content Include="Views\Order\CompleteOrderStatus.Mobile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\CurrentOrder.cshtml" />
@@ -228,6 +228,8 @@
     <None Include="Content\images\Thumbs.db" />
     <Content Include="Views\Order\CurrentOrder.Mobile.cshtml" />
     <Content Include="Views\Order\Index.Mobile.cshtml" />
+    <Content Include="Views\Shared\Footer.Mobile.cshtml" />
+    <Content Include="Views\Order\CompleteOrderStatus.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

@@ -5,7 +5,10 @@
 	Layout = "~/Views/Shared/_Layout.Mobile.cshtml";
 }
 <section id="login-page" data-role="page" >
-	<header data-role="header"><h1>OrdersList</h1></header>
+	<header data-role="header"  data-position="fixed" >
+		<h1>OrdersList</h1>
+		@Html.ActionLink("Log Off", "LogOff", "Account",null, new{@class="ui-btn-right"})
+	</header>
 	<div data-role="content">
 		<ul data-role="listview" >
 			@foreach ( var item in Model )
@@ -23,4 +26,13 @@
 			}
 		</ul>
 	</div>
+	<footer data-role="footer">
+		<nav data-role="navbar">
+			<ul>
+				<li>@Html.ActionLink("Foods", "Index", "Food")</li>
+				<li>@Html.ActionLink("History", "Index", "Order")</li>
+				<li>@Html.ActionLink("Orders", "CurrentOrder", "Order")</li>
+			</ul>
+		</nav>
+	</footer>
 </section>

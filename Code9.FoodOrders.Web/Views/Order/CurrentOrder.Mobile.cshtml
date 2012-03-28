@@ -5,46 +5,45 @@
 }
 
 <section id="login-page" data-role="page" >
-	<header data-role="header"><h1>FoodList</h1></header>
-	<div data-role="content">
-
-		<div id="CurrentOrderDiv">
-			@using ( Html.BeginForm("CompleteOrder", "Order", FormMethod.Post) )
+	<header data-role="header"  data-position="fixed" >
+		<h1>Order</h1>
+		@Html.ActionLink("Log Off", "LogOff", "Account",null, new{@class="ui-btn-right"})
+	</header>
+	
+	<div id="CurrentOrderDiv" data-role="content">
+		@using ( Html.BeginForm("CompleteOrder", "Order", FormMethod.Post) )
+		{
+			@Html.ValidationSummary(true)
+						   
+			if ( Model.FoodNames.Any() )
 			{
-				@Html.ValidationSummary(true)
-				<fieldset>
-					<legend>Your current order:</legend>           
-					@if ( Model.FoodNames.Any() )
-					{
-						<ul>
+				<div data-role="fieldcontain">
+					<ul data-role="listview">
 			
-							@for ( int i = 0; i < Model.FoodNames.Count; i++ )
-							{
-								<li>@Model.FoodNames[i] | [@Html.ActionLink("Remove", "RemoveOrderFood", "Order", new { foodId = Model.FoodIds[i] }, null)]</li>
-							}
-						</ul>
-						<p>
-							<input type="submit" value="Complete this order" />        
-						</p>
-					}
-					else
-					{
-						<br/>
-						<div>No meals selected yet.</div>
-					}
-
-				</fieldset>
+						@for ( int i = 0; i < Model.FoodNames.Count; i++ )
+						{
+							<li data-role="fieldcontain">
+								<fieldset data-role="controlgroup" data-type="horizontal">
+									<legend>@Model.FoodNames[i]</legend>
+									@Html.ActionLink("Remove", "RemoveOrderFood", "Order", 
+					   new { foodId = Model.FoodIds[i]},
+											   new { data_role = "button", data_inline = "true", data_theme = "b", data_icon = "delete", @class = "ui-btn-right" })
+								</fieldset>
+							</li>
+						}
+					</ul>
+				</div>
+				<div data-role="fieldcontain">
+					<input type="submit" data-role="button" data-icon="check"  value="Complete this order" />        
+				</div>
 			}
-		</div>
+			else
+			{
+				<br/>
+				<div>No meals selected yet.</div>
+			}
+		}
 	</div>
-	<footer data-role="footer">
-		<nav data-role="navbar">
-			<ul>
-				@Html.ActionLink("Foods", "Index", "Food")
-				@Html.ActionLink("History", "Index", "Order")
-				<a href="@Url.Action("CurrentOrder", "Order")">Orders</a>
-			</ul>
-		</nav>
-	</footer>
+	@Html.Partial("Footer.Mobile")
 </section>
 
