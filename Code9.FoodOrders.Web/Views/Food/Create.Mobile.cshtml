@@ -1,0 +1,51 @@
+﻿@model Code9.FoodOrders.Data.Food
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+<section id="login-page" data-role="page" >
+	<header data-role="header" data-position="fixed" >
+		<h1>Create food</h1>
+		@Html.ActionLink("Log Off", "LogOff", "Account",null, new{@class="ui-btn-right"})
+	</header>
+
+
+	<div data-role="content">
+
+		@using (Html.BeginForm()) {
+			@Html.ValidationSummary(true)
+			<fieldset data-role="fieldcontain">
+				<legend>Food</legend>
+
+				<div class="editor-label">
+					@Html.LabelFor(model => model.Name)
+				</div>
+				<div class="editor-field">
+					@Html.EditorFor(model => model.Name)
+					@Html.ValidationMessageFor(model => model.Name)
+				</div>
+
+				<div class="editor-label">
+					@Html.LabelFor(model => model.Description)
+				</div>
+				<div class="editor-field">
+					@Html.EditorFor(model => model.Description)
+					@Html.ValidationMessageFor(model => model.Description)
+				</div>
+
+				<p>
+					<input type="submit" value="Create" />
+				</p>
+			</fieldset>
+		}
+
+		<div>
+			@Html.ActionLink("Back to List", "Index")
+		</div>
+	</div>
+	
+</section>

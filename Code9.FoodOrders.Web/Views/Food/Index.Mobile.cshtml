@@ -13,12 +13,12 @@
 	</header>
 	<div data-role="content">
 		<p>
-			@Html.ActionLink("Create New", "Create",null,new{ data_role="button"})
+			@Html.ActionLink("Create new meal", "Create")
 		</p>
 		<ul data-role="listview" >
 			@foreach (var item in Model) {
 				<li>
-					<a href="@Url.Action("AddFoodToOrder", new { foodId = item.Id })" data-transition="none">
+				<a href="@Url.Action("AddFoodToOrder", new { foodId = item.Id })" data-transition="none">
 						<h1>@item.Name</h1>
 						<p>@item.Description</p>
 					</a>
