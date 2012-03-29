@@ -1,9 +1,10 @@
 ﻿@model IEnumerable<Code9.FoodOrders.Data.Food>
 
-
 @{
 	ViewBag.Title = "FoodList";
+	ViewBag.CurrentPage = 1;
 	Layout = "~/Views/Shared/_Layout.Mobile.cshtml";
+	
 }
 <section id="login-page" data-role="page" >
 	<header data-role="header" data-position="fixed" >
@@ -11,14 +12,10 @@
 		@Html.ActionLink("Log Off", "LogOff", "Account",null, new{@class="ui-btn-right"})
 	</header>
 	<div data-role="content">
-		<fieldset data-role="fieldcontain">
-		
 		<p>
 			@Html.ActionLink("Create New", "Create",null,new{ data_role="button"})
 		</p>
-
 		<ul data-role="listview" >
-
 			@foreach (var item in Model) {
 				<li>
 					<a href="@Url.Action("AddFoodToOrder", new { foodId = item.Id })" data-transition="none">
@@ -28,7 +25,6 @@
 				</li>
 			}
 		</ul>
-		</fieldset>
 	</div>
 	@Html.Partial("Footer.Mobile")
 </section>

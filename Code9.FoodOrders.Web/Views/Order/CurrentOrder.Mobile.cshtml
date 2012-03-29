@@ -1,6 +1,7 @@
 ﻿@model Code9.FoodOrders.Web.Models.OrderViewModel
 @{
-	ViewBag.Title = "FoodList";
+	ViewBag.Title = "Order";
+	ViewBag.CurrentPage = 3;
 	Layout = "~/Views/Shared/_Layout.Mobile.cshtml";
 }
 
@@ -34,7 +35,7 @@
 					</ul>
 				</div>
 				<div data-role="fieldcontain">
-					<input type="submit" data-role="button" data-icon="check"  value="Complete this order" />        
+					<input type="submit" data-role="button" data-icon="check" value="Complete this order" data-transition="flip" />        
 				</div>
 			}
 			else

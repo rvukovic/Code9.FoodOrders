@@ -1,9 +1,9 @@
 ﻿<footer data-role="footer" data-position="fixed" >
 	<nav data-role="navbar">
 		<ul>
-			<li>@Html.ActionLink("Foods", "Index", "Food")</li>
-			<li>@Html.ActionLink("History", "Index", "Order")</li>
-			<li>@Html.ActionLink("Orders", "CurrentOrder", "Order")</li>
+			<li>@Html.ActionLink("Foods", "Index", "Food", null, ViewBag.CurrentPage == 1 ? new {@class="ui-btn-active"} : null)</li>
+			<li>@Html.ActionLink("History", "Index", "Order", null, ViewBag.CurrentPage == 2 ? new { @class = "ui-btn-active" } : null)</li>
+			<li>@Html.ActionLink("Orders", "CurrentOrder", "Order", null, ViewBag.CurrentPage == 3 ? new { @class = "ui-btn-active" } : null)</li>
 		</ul>
 	</nav>
 </footer>
