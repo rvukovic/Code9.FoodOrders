@@ -12,9 +12,10 @@
 		@Html.ActionLink("Log Off", "LogOff", "Account",null, new{@class="ui-btn-right"})
 	</header>
 	<div data-role="content">
-		<p>
+		<h3>
 			@Html.ActionLink("Create new meal", "Create")
-		</p>
+		</h3>
+		<p>&nbsp;</p>
 		<ul data-role="listview" >
 			@foreach (var item in Model) {
 				<li>

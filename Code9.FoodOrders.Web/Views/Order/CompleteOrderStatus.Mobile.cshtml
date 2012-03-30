@@ -4,18 +4,16 @@
 	ViewBag.Title = "OrdersList";
 	Layout = "~/Views/Shared/_Layout.Mobile.cshtml";
 }
-<section id="login-page" data-role="dialog" >
-	<header data-role="header"  data-position="fixed" >
+<section id="login-page" data-transition="slidedown" data-role="dialog">
+	<header data-role="header"  data-position="fixed" data-theme="e">
 		<h1>Order complete</h1>
-		@Html.ActionLink("Log Off", "LogOff", "Account",null, new{@class="ui-btn-right"})
 	</header>
 	
-	<div id="CurrentOrderDiv" data-role="content">
+	<div id="CurrentOrderDiv" data-role="content" data-theme="e">
 			<fieldset data-role="fieldcontain">
-				<div>
-					<h1>OrderDate</h1>
-					<p>@Model.OrderDate.ToShortDateString()</p>
-				</div>
+				<legend>
+					<h1>Order Date: @Model.OrderDate.ToShortDateString()</h1>
+				</legend>
 				<ul data-role="listview">
 					@foreach (var food in Model.FoodNames)
 					{
@@ -24,5 +22,4 @@
 				</ul>
 			</fieldset>
 	</div>
-	@Html.Partial("Footer.Mobile")
 </section>

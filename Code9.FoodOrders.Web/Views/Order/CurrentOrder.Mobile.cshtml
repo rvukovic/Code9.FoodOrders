@@ -27,16 +27,16 @@
 								<fieldset data-role="controlgroup" data-type="horizontal">
 									<legend>@Model.FoodNames[i]</legend>
 									@Html.ActionLink("Remove", "RemoveOrderFood", "Order", 
-					   new { foodId = Model.FoodIds[i]},
-											   new { data_role = "button", data_inline = "true", data_theme = "b", data_icon = "delete", @class = "ui-btn-right" })
+												new { foodId = Model.FoodIds[i]},
+												new { data_role = "button", data_inline = "true", data_theme = "b",
+													data_icon = "delete", @class = "ui-btn-right"})
 								</fieldset>
 							</li>
 						}
 					</ul>
 				</div>
-				<div data-role="fieldcontain">
-					<input type="submit" data-role="button" data-icon="check" value="Complete this order" data-transition="flip" />        
-				</div>
+				<p>&nbsp;</p>
+				<input type="submit" data-role="button" data-icon="check" value="Complete this order"/>        
 			}
 			else
 			{
